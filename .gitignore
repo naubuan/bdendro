@@ -1,1 +1,8 @@
 __pycache__/
+
+docs_src/api/*
+!docs_src/api/bdendro.rst
+
+docs_src/examples/generated/
+
+docs_src/_build/
