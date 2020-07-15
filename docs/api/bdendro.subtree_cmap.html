@@ -1,0 +1,134 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bdendro.subtree_cmap function &#8212; BDendro 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="bdendro.set_axes function" href="bdendro.set_axes.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bdendro.set_axes.html" title="bdendro.set_axes function"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="bdendro.html" accesskey="U">bdendro package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">bdendro.subtree_cmap function</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bdendro-subtree-cmap-function">
+<h1>bdendro.subtree_cmap function<a class="headerlink" href="#bdendro-subtree-cmap-function" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="bdendro.subtree_cmap">
+<code class="sig-prename descclassname">bdendro.</code><code class="sig-name descname">subtree_cmap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dendrogram</span></em>, <em class="sig-param"><span class="n">palette</span></em>, <em class="sig-param"><span class="n">default_color</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip_single</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/naubuan/bdendro/blob/v1.0.0/bdendro/core/transform.py#L10-L49"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdendro.subtree_cmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a mapping from a subtree label to a color.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dendrogram</strong> (<em>bokeh.models.renderer.GraphRenderer</em>) – Renderer returned by <a class="reference internal" href="bdendro.dendrogram_renderer.html#bdendro.dendrogram_renderer" title="bdendro.dendrogram_renderer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdendro.dendrogram_renderer</span></code></a> function.</p></li>
+<li><p><strong>palette</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>]</em>) – Colors of subtrees. If <code class="docutils literal notranslate"><span class="pre">default_color</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the first item is
+removed and used for it.</p></li>
+<li><p><strong>default_color</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) – Default color of a tree. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the first item of <code class="docutils literal notranslate"><span class="pre">palette</span></code> is
+removed and used for this.</p></li>
+<li><p><strong>skip_single</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, a subtree consisting of a single node is colored with
+<code class="docutils literal notranslate"><span class="pre">default_color</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>cmap</strong> (<em>dict</em>) – Mapping from a subtree label to a color.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../examples/generated/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="bdendro.html">bdendro package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bdendro.dendrogram_renderer.html">bdendro.dendrogram_renderer function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bdendro.set_axes.html">bdendro.set_axes function</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bdendro.subtree_cmap function</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bdendro.set_axes.html"
+                        title="previous chapter">bdendro.set_axes function</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bdendro.set_axes.html" title="bdendro.set_axes function"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="bdendro.html" >bdendro package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">bdendro.subtree_cmap function</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, naubuan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

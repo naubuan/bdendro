@@ -1,0 +1,163 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloring a subtree consisting of a single node &#8212; BDendro 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Horizontal layout" href="horizontal_layout.html" />
+    <link rel="prev" title="Default color" href="default_color.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="horizontal_layout.html" title="Horizontal layout"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="default_color.html" title="Default color"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Examples</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Coloring a subtree consisting of a single node</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="coloring-a-subtree-consisting-of-a-single-node">
+<h1>Coloring a subtree consisting of a single node<a class="headerlink" href="#coloring-a-subtree-consisting-of-a-single-node" title="Permalink to this headline">¶</a></h1>
+
+<script src="bokeh-plot-b304cf8ab3e449448e796361e3ead8b4-external-examples-generated-coloring_a_subtree_consisting_of_a_single_node.js" id="16e2dd8f-1133-4b57-b278-1e806c580ca8"></script><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bokeh.io</span>
+<span class="kn">import</span> <span class="nn">bokeh.palettes</span>
+<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
+<span class="kn">import</span> <span class="nn">scipy.cluster.hierarchy</span>
+<span class="kn">import</span> <span class="nn">bdendro</span>
+
+
+<span class="c1"># prepare data points</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+
+<span class="c1"># clustering</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">hierarchy</span><span class="o">.</span><span class="n">linkage</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># make a renderer</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">dendrogram</span> <span class="o">=</span> <span class="n">bdendro</span><span class="o">.</span><span class="n">dendrogram_renderer</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+
+<span class="c1"># color subtrees</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">bdendro</span><span class="o">.</span><span class="n">subtree_cmap</span><span class="p">(</span><span class="n">dendrogram</span><span class="p">,</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">palettes</span><span class="o">.</span><span class="n">Category10</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span>
+                            <span class="n">skip_single</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dendrogram</span><span class="o">.</span><span class="n">node_renderer</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># for easy viewing</span>
+<span class="n">dendrogram</span><span class="o">.</span><span class="n">node_renderer</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cmap</span>
+<span class="n">dendrogram</span><span class="o">.</span><span class="n">node_renderer</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">fill_color</span> <span class="o">=</span> <span class="n">cmap</span>
+<span class="n">dendrogram</span><span class="o">.</span><span class="n">edge_renderer</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cmap</span>
+
+<span class="c1"># make a figure</span>
+<span class="n">figure</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">bdendro</span><span class="o">.</span><span class="n">set_axes</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dendrogram</span><span class="p">)</span>
+<span class="n">figure</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">figure</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dendrogram</span><span class="p">)</span>
+<span class="n">figure</span><span class="o">.</span><span class="n">add_layout</span><span class="p">(</span><span class="n">bokeh</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Span</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                                    <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dotted&quot;</span><span class="p">))</span>
+
+<span class="c1"># show a figure</span>
+<span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basic_usage.html">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="leaf_labels.html">Leaf labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coloring_subtrees.html">Coloring subtrees</a></li>
+<li class="toctree-l2"><a class="reference internal" href="default_color.html">Default color</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Coloring a subtree consisting of a single node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="horizontal_layout.html">Horizontal layout</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/bdendro.html">bdendro package</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="default_color.html"
+                        title="previous chapter">Default color</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="horizontal_layout.html"
+                        title="next chapter">Horizontal layout</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="horizontal_layout.html" title="Horizontal layout"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="default_color.html" title="Default color"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Home</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Examples</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Coloring a subtree consisting of a single node</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, naubuan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
