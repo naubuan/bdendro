@@ -1,20 +1,34 @@
+from __future__ import annotations
+
 import itertools
+from typing import TYPE_CHECKING, cast
 
 import bokeh.transform
-import numpy
+import numpy as np
 
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from bokeh.core.property.vectorization import Field
+    from bokeh.models import ColumnDataSource
+    from bokeh.models.renderers import GraphRenderer
 
 __all__ = ["subtree_cmap"]
 
 
-def subtree_cmap(dendrogram, palette, default_color=None, skip_single=True):
+def subtree_cmap(
+    dendrogram: GraphRenderer,
+    palette: Sequence[str],
+    default_color: str | None = None,
+    skip_single: bool = True,
+) -> Field:
     """Make a mapping from a subtree label to a color.
 
     Parameters
     ----------
-    dendrogram : bokeh.models.renderer.GraphRenderer
+    dendrogram : bokeh.models.GraphRenderer
         Renderer returned by `bdendro.dendrogram_renderer` function.
-    palette : list[str]
+    palette : Sequence[str]
         Colors of subtrees. If ``default_color`` is ``None``, the first item is
         removed and used for it.
     default_color : str or None, optional
@@ -26,7 +40,7 @@ def subtree_cmap(dendrogram, palette, default_color=None, skip_single=True):
 
     Returns
     -------
-    cmap : dict
+    cmap : bokeh.core.property.vectorization.Field
         Mapping from a subtree label to a color.
     """
     if default_color is None:
@@ -34,8 +48,8 @@ def subtree_cmap(dendrogram, palette, default_color=None, skip_single=True):
 
     field_name = "subtree"
 
-    factors, nums = numpy.unique(
-        dendrogram.node_renderer.data_source.data[field_name],
+    factors, nums = np.unique(
+        cast("ColumnDataSource", dendrogram.node_renderer.data_source).data[field_name],
         return_counts=True)
     if skip_single:
         factors = factors[1 < nums]
@@ -43,7 +57,5 @@ def subtree_cmap(dendrogram, palette, default_color=None, skip_single=True):
     factors = sorted(factors, key=lambda item: int(item))
 
     palette = list(itertools.islice(itertools.cycle(palette), len(factors)))
-    cmap = bokeh.transform.factor_cmap(field_name, palette, factors,
-                                       nan_color=default_color)
 
-    return cmap
+    return bokeh.transform.factor_cmap(field_name, palette, factors, nan_color=default_color)

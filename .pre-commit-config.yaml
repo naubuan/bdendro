@@ -1,0 +1,40 @@
+exclude: ^docs/
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: no-commit-to-branch
+      - id: trailing-whitespace
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: rst-backticks
+      - id: rst-directive-colons
+      - id: rst-inline-touching-normal
+
+  - repo: local
+    hooks:
+      - id: uv-lock
+        name: update uv.lock
+        entry: uv lock
+        language: unsupported
+        files: ^(pyproject\.toml|uv\.lock)$
+        pass_filenames: false
+        stages: [pre-commit, pre-merge-commit]
+        fail_fast: true
+
+      - id: lint
+        name: lint
+        entry: nox --session=lint
+        language: unsupported
+        types_or: [python, jupyter]
+        pass_filenames: false
+        stages: [pre-commit, pre-merge-commit]

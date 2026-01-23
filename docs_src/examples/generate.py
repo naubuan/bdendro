@@ -1,12 +1,15 @@
+from __future__ import annotations
+
 import pathlib
 import sys
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+    from pathlib import Path
 
 
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
-
-
-def main():
-
+def main() -> int:
     directory = pathlib.Path(__file__).parent
 
     root = directory.parent
@@ -26,26 +29,27 @@ def main():
     rests = [generated / f"{script.stem}.rst" for script in scripts]
     images = [generated / f"{script.stem}.png" for script in scripts]
     if not home.exists():
-        print(f"generate '{home}'...")
+        print(f"generate '{home}'...")  # noqa: T201
         generate_home_rest(home, rests, images)
-    for script, rest in zip(scripts, rests):
+    for script, rest in zip(scripts, rests, strict=True):
         if not rest.exists():
-            print(f"generate '{rest}'...")
+            print(f"generate '{rest}'...")  # noqa: T201
             generate_rest(rest, script, root)
-    for script, image in zip(scripts, images):
+    for script, image in zip(scripts, images, strict=True):
         if not image.exists():
-            print(f"generate '{image}'...")
+            print(f"generate '{image}'...")  # noqa: T201
             generate_image(image, script)
 
+    return 0
 
-def generate_home_rest(path, rests, images):
 
+def generate_home_rest(path: Path, rests: Sequence[Path], images: Sequence[Path]) -> None:
     rests = [rest.relative_to(path.parent) for rest in rests]
     images = [image.relative_to(path.parent) for image in images]
 
     lines = ["Examples\n",
              "========\n"]
-    for rest, image in zip(rests, images):
+    for rest, image in zip(rests, images, strict=True):
         lines.extend(["\n",
                       f".. figure:: {image}\n",
                       f"   :target: {rest.with_suffix('.html')}\n",
@@ -59,12 +63,11 @@ def generate_home_rest(path, rests, images):
                   "\n"])
     lines.extend(f"   {rest.with_suffix('')}\n" for rest in rests)
 
-    with open(path, mode="w") as f:
+    with path.open(mode="w") as f:
         f.writelines(lines)
 
 
-def generate_rest(path, script, root):
-
+def generate_rest(path: Path, script: Path, root: Path) -> None:
     script = script.relative_to(root)
 
     heading = script.stem.replace("_", " ").capitalize()
@@ -73,17 +76,19 @@ def generate_rest(path, script, root):
              "\n",
              f".. bokeh-plot:: {script}\n"]
 
-    with open(path, mode="w") as f:
+    with path.open(mode="w") as f:
         f.writelines(lines)
 
 
-def generate_image(path, script):
-
-    with open(script, mode="r") as f:
+def generate_image(path: Path, script: Path) -> None:
+    with script.open(mode="r") as f:
         lines = f.readlines()
-    lines[-1] = f"bokeh.io.export_png(figure, filename='{path}')\n"
+    lines[-1:] = [
+        "import chromedriver_binary\n",
+        f"bokeh.io.export_png(figure, filename='{path}')\n",
+    ]
 
-    exec("".join(lines))
+    exec("".join(lines))  # noqa: S102
 
 
 if __name__ == "__main__":
