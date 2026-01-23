@@ -1,13 +1,27 @@
-import bokeh.models
-import numpy
-import scipy.cluster.hierarchy
+from __future__ import annotations
 
+from typing import TYPE_CHECKING, cast
+
+import bokeh.models
+import numpy as np
+import scipy
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from bokeh.models.renderers import GraphRenderer
+    from numpy import float64, floating
+    from numpy.typing import NDArray
 
 __all__ = ["dendrogram_renderer"]
 
 
-def dendrogram_renderer(Z, threshold=None, vertical=True):
-    """Make a renderer of a dendrogram.
+def dendrogram_renderer(
+    Z: NDArray[floating],
+    threshold: float | None = None,
+    vertical: bool = True,
+) -> GraphRenderer:
+    r"""Make a renderer of a dendrogram.
 
     Parameters
     ----------
@@ -23,7 +37,7 @@ def dendrogram_renderer(Z, threshold=None, vertical=True):
 
     Returns
     -------
-    graph : bokeh.models.renderers.GraphRenderer
+    graph : bokeh.models.GraphRenderer
         Renderer of a dendrogram
 
     Notes
@@ -36,13 +50,13 @@ def dendrogram_renderer(Z, threshold=None, vertical=True):
     corresponding item is an empty string.
     """
     if threshold is None:
-        threshold = -numpy.inf
+        threshold = -np.inf
 
     n_leaves = len(Z) + 1
 
     node_bs, node_hs = _get_node_coords(Z)
 
-    node_subtrees = _get_subtrees(Z, node_hs[n_leaves:], threshold)
+    node_subtrees = _get_subtrees(Z, cast("list[float]", node_hs[n_leaves:].tolist()), threshold)
     node_subtrees = [str(subtree) if subtree is not None else ""
                      for subtree in node_subtrees]
 
@@ -53,7 +67,8 @@ def dendrogram_renderer(Z, threshold=None, vertical=True):
     edge_subtrees = []
     for node, (node_b, node_h, children, subtree) in list(
             enumerate(zip(node_bs[n_leaves:], node_hs[n_leaves:],
-                          Z[:, [0, 1]].astype(int), node_subtrees[n_leaves:]),
+                          Z[:, [0, 1]].astype(int), node_subtrees[n_leaves:],
+                          strict=True),
                       start=n_leaves))[::-1]:
         for child in children:
             child_b = node_bs[child]
@@ -79,17 +94,17 @@ def dendrogram_renderer(Z, threshold=None, vertical=True):
                  "ys": edge_ys, "subtree": edge_subtrees}
 
     layout_provider = bokeh.models.StaticLayoutProvider(
-        graph_layout=dict(enumerate(zip(node_xs, node_ys))))
+        graph_layout=dict(enumerate(zip(node_xs, node_ys, strict=True))))
 
-    graph = bokeh.models.GraphRenderer()
-    graph.node_renderer.data_source.data = node_data
-    graph.edge_renderer.data_source.data = edge_data
+    graph = bokeh.models.renderers.GraphRenderer()
+    graph.node_renderer.data_source = bokeh.models.ColumnDataSource(node_data)
+    graph.edge_renderer.data_source = bokeh.models.ColumnDataSource(edge_data)
     graph.layout_provider = layout_provider
 
     return graph
 
 
-def _get_node_coords(Z):
+def _get_node_coords(Z: NDArray[floating]) -> tuple[NDArray[float64], NDArray[float64]]:
     """Calculate coordinates of nodes.
 
     Parameters
@@ -108,8 +123,8 @@ def _get_node_coords(Z):
     n_leaves = len(Z) + 1
     n_nodes = 2*len(Z) + 1
 
-    bs = numpy.empty(n_nodes, dtype=float)
-    hs = numpy.empty(n_nodes, dtype=float)
+    bs = np.empty(n_nodes, dtype=float)
+    hs = np.empty(n_nodes, dtype=float)
 
     leaf_ordering = scipy.cluster.hierarchy.leaves_list(Z)
     bs[:n_leaves] = leaf_ordering.argsort()
@@ -122,7 +137,7 @@ def _get_node_coords(Z):
     return bs, hs
 
 
-def _get_subtrees(Z, hs, threshold):
+def _get_subtrees(Z: NDArray[floating], hs: Sequence[float], threshold: float) -> list[int | None]:
     """Return subtrees to which nodes belong.
 
     Parameters
@@ -144,7 +159,7 @@ def _get_subtrees(Z, hs, threshold):
     n_leaves = len(Z) + 1
     n_nodes = 2*len(Z) + 1
 
-    subtrees = [None] * n_nodes
+    subtrees: list[int | None] = [None] * n_nodes
     n_subtrees = 0
     if hs[-1] <= threshold:
         subtrees[-1] = n_subtrees

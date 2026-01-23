@@ -1,32 +1,30 @@
 
+<!DOCTYPE html>
 
-<!doctype html>
-
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Coloring subtrees &#8212; BDendro 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bizstyle.css?v=5283bb3d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3d8ab858" />
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/documentation_options.js?v=a12e3537"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Default color" href="default_color.html" />
     <link rel="prev" title="Leaf labels" href="leaf_labels.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -52,15 +50,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="coloring-subtrees">
-<h1>Coloring subtrees<a class="headerlink" href="#coloring-subtrees" title="Permalink to this headline">¶</a></h1>
+  <section id="coloring-subtrees">
+<h1>Coloring subtrees<a class="headerlink" href="#coloring-subtrees" title="Link to this heading">¶</a></h1>
+<div style="height:300px;"><script src="bokeh-content-2368ed33bbe94be38a417def032befe5-examples-generated-coloring_subtrees.js" id="c14b1a95-c40f-427f-9393-4521074c9bf1"></script></div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.models</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.palettes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bokeh.plotting</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
 
-<script src="bokeh-plot-f4b45091bb624b07952d67c65586c4b3-external-examples-generated-coloring_subtrees.js" id="7511a6c9-cdd9-4e33-955e-73a7be381acd"></script><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bokeh.io</span>
-<span class="kn">import</span> <span class="nn">bokeh.palettes</span>
-<span class="kn">import</span> <span class="nn">bokeh.plotting</span>
-<span class="kn">import</span> <span class="nn">scipy.cluster.hierarchy</span>
-<span class="kn">import</span> <span class="nn">bdendro</span>
-
+<span class="kn">import</span><span class="w"> </span><span class="nn">bdendro</span>
 
 <span class="c1"># prepare data points</span>
 <span class="n">X</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
@@ -80,7 +78,7 @@
 <span class="n">dendrogram</span><span class="o">.</span><span class="n">edge_renderer</span><span class="o">.</span><span class="n">glyph</span><span class="o">.</span><span class="n">line_color</span> <span class="o">=</span> <span class="n">cmap</span>
 
 <span class="c1"># make a figure</span>
-<span class="n">figure</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">figure</span> <span class="o">=</span> <span class="n">bokeh</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 <span class="n">bdendro</span><span class="o">.</span><span class="n">set_axes</span><span class="p">(</span><span class="n">figure</span><span class="p">,</span> <span class="n">dendrogram</span><span class="p">)</span>
 <span class="n">figure</span><span class="o">.</span><span class="n">xgrid</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">figure</span><span class="o">.</span><span class="n">renderers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dendrogram</span><span class="p">)</span>
@@ -91,17 +89,18 @@
 <span class="n">bokeh</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_usage.html">Basic usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="leaf_labels.html">Leaf labels</a></li>
@@ -114,27 +113,32 @@
 <li class="toctree-l1"><a class="reference internal" href="../../api/bdendro.html">bdendro package</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="leaf_labels.html"
-                        title="previous chapter">Leaf labels</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="default_color.html"
-                        title="next chapter">Default color</a></p>
-<div id="searchbox" style="display: none" role="search">
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="leaf_labels.html"
+                          title="previous chapter">Leaf labels</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="default_color.html"
+                          title="next chapter">Default color</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -155,8 +159,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, naubuan.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    &#169; Copyright 2020, naubuan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     </div>
   </body>
 </html>

@@ -1,23 +1,20 @@
+from __future__ import annotations
+
+import importlib.metadata
 import inspect
 import pathlib
 import sys
 
-
-project_root = pathlib.Path(__file__).parents[1]
-sys.path.append(str(project_root))
-
-package_name = "bdendro"
-
-variables = {}
-with open(project_root / package_name / "version.py", mode="r") as f:
-    exec(f.read(), variables)
-release = variables["__version__"]
+_PROJECT_ROOT = pathlib.Path(__file__).parents[1]
+_PACKAGE_NAME = "bdendro"
+_PACKAGE_METADATA = importlib.metadata.metadata(_PACKAGE_NAME)
 
 project_root_url = "https://github.com/naubuan/bdendro"
 
 project = "BDendro"
-author = "naubuan"
-copyright = f"2020, {author}"
+author = _PACKAGE_METADATA["Author"]
+project_copyright = f"2020, {author}"
+version = release = _PACKAGE_METADATA["Version"]
 
 today_fmt = "%B %d, %Y"
 
@@ -31,6 +28,7 @@ extensions = ["sphinx.ext.autodoc",
               "sphinx.ext.napoleon",
               "sphinxcontrib.fulltoc",
               "bokeh.sphinxext.bokeh_plot"]
+autodoc_typehints = "none"
 autosummary_generate = True
 autosummary_generate_overwrite = False
 intersphinx_mapping = {
@@ -42,20 +40,23 @@ napoleon_numpy_docstring = True
 napoleon_use_rtype = False
 napoleon_use_admonition_for_notes = True
 
-def linkcode_resolve(domain, info):
+def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
     if domain != "py":
         return None
     obj = sys.modules[info["module"]]
     for attr in info["fullname"].split("."):
         obj = getattr(obj, attr)
-    path = pathlib.Path(inspect.getsourcefile(obj))
-    path = path.relative_to(project_root)
+    path_str = inspect.getsourcefile(obj)
+    if path_str is None:
+        message = f"failed to get a source file of {info['module']}.{info['fullname']}"
+        raise RuntimeError(message)
+    path = pathlib.Path(path_str)
+    path = path.relative_to(_PROJECT_ROOT)
     lines, start = inspect.getsourcelines(obj)
     end = start + len(lines) - 1
     return f"{project_root_url}/blob/v{release}/{path}#L{start}-L{end}"
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build"]
 
 html_theme = "bizstyle"
 html_short_title = "Home"

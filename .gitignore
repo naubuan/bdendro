@@ -1,8 +1,15 @@
+*.egg-info/
+*.py[co]
 __pycache__/
 
+docs_src/.doctrees/
 docs_src/api/*
 !docs_src/api/bdendro.rst
-
 docs_src/examples/generated/
 
-docs_src/_build/
+.venv/
+.nox/
+
+.ruff_cache/
+
+.mypy_cache/

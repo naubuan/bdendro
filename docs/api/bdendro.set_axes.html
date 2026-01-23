@@ -1,32 +1,30 @@
 
+<!DOCTYPE html>
 
-<!doctype html>
-
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>bdendro.set_axes function &#8212; BDendro 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css?v=5283bb3d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=3d8ab858" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <script src="../_static/documentation_options.js?v=a12e3537"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="bdendro.subtree_cmap function" href="bdendro.subtree_cmap.html" />
     <link rel="prev" title="bdendro.dendrogram_renderer function" href="bdendro.dendrogram_renderer.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
     <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -52,36 +50,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="bdendro-set-axes-function">
-<h1>bdendro.set_axes function<a class="headerlink" href="#bdendro-set-axes-function" title="Permalink to this headline">¶</a></h1>
+  <section id="bdendro-set-axes-function">
+<h1>bdendro.set_axes function<a class="headerlink" href="#bdendro-set-axes-function" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt id="bdendro.set_axes">
-<code class="sig-prename descclassname">bdendro.</code><code class="sig-name descname">set_axes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">figure</span></em>, <em class="sig-param"><span class="n">dendrogram</span></em>, <em class="sig-param"><span class="n">labels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vertical</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/naubuan/bdendro/blob/v1.0.0/bdendro/core/axes.py#L7-L73"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bdendro.set_axes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bdendro.set_axes">
+<span class="sig-prename descclassname"><span class="pre">bdendro.</span></span><span class="sig-name descname"><span class="pre">set_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">figure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dendrogram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/naubuan/bdendro/blob/v1.0.0/src/bdendro/_axes.py#L17-L93"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bdendro.set_axes" title="Link to this definition">¶</a></dt>
 <dd><p>Set x and y axes to be appropriate for a dendrogram.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>figure</strong> (<a class="reference external" href="https://docs.bokeh.org/en/latest/docs/reference/models/plots.html#bokeh.models.plots.Plot" title="(in Bokeh v2.1.1)"><em>bokeh.models.plots.Plot</em></a>) – Figure whose axes are set.</p></li>
-<li><p><strong>dendrogram</strong> (<em>bokeh.models.renderer.GraphRenderer</em>) – Renderer returned by <a class="reference internal" href="bdendro.dendrogram_renderer.html#bdendro.dendrogram_renderer" title="bdendro.dendrogram_renderer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdendro.dendrogram_renderer</span></code></a> function.</p></li>
-<li><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>] or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em>, </em><em>optional</em>) – Labels of leaves. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, indices of leaves are used.</p></li>
-<li><p><strong>vertical</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the height direction of a dendrogram is the y direction.
+<li><p><strong>figure</strong> (<a class="reference external" href="https://docs.bokeh.org/en/latest/docs/reference/models/plots.html#bokeh.models.Plot" title="(in Bokeh v3.8.2)"><em>bokeh.models.plots.Plot</em></a>) – Figure whose axes are set.</p></li>
+<li><p><strong>dendrogram</strong> (<a class="reference external" href="https://docs.bokeh.org/en/latest/docs/reference/models/renderers.html#bokeh.models.GraphRenderer" title="(in Bokeh v3.8.2)"><em>bokeh.models.GraphRenderer</em></a>) – Renderer returned by <a class="reference internal" href="bdendro.dendrogram_renderer.html#bdendro.dendrogram_renderer" title="bdendro.dendrogram_renderer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdendro.dendrogram_renderer</span></code></a> function.</p></li>
+<li><p><strong>labels</strong> (<em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>] or </em><em>None</em><em>, </em><em>optional</em>) – Labels of leaves. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, indices of leaves are used.</p></li>
+<li><p><strong>vertical</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the height direction of a dendrogram is the y direction.
 If <code class="docutils literal notranslate"><span class="pre">False</span></code>, it is the x direction.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul class="current">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../examples/generated/index.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="bdendro.html">bdendro package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="bdendro.dendrogram_renderer.html">bdendro.dendrogram_renderer function</a></li>
@@ -91,27 +90,32 @@ If <code class="docutils literal notranslate"><span class="pre">False</span></co
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="bdendro.dendrogram_renderer.html"
-                        title="previous chapter">bdendro.dendrogram_renderer function</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="bdendro.subtree_cmap.html"
-                        title="next chapter">bdendro.subtree_cmap function</a></p>
-<div id="searchbox" style="display: none" role="search">
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="bdendro.dendrogram_renderer.html"
+                          title="previous chapter">bdendro.dendrogram_renderer function</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="bdendro.subtree_cmap.html"
+                          title="next chapter">bdendro.subtree_cmap function</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -132,8 +136,8 @@ If <code class="docutils literal notranslate"><span class="pre">False</span></co
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, naubuan.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    &#169; Copyright 2020, naubuan.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
     </div>
   </body>
 </html>

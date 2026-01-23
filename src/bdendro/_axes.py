@@ -1,38 +1,57 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
+
 import bokeh.models
 
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from bokeh.models import Plot, StaticLayoutProvider
+    from bokeh.models.renderers import GraphRenderer
+    from bokeh.models.text import BaseText
 
 __all__ = ["set_axes"]
 
 
-def set_axes(figure, dendrogram, labels=None, vertical=True):
+def set_axes(
+    figure: Plot,
+    dendrogram: GraphRenderer,
+    labels: Sequence[str] | None = None,
+    vertical: bool = True,
+) -> None:
     """Set x and y axes to be appropriate for a dendrogram.
 
     Parameters
     ----------
     figure : bokeh.models.plots.Plot
         Figure whose axes are set.
-    dendrogram : bokeh.models.renderer.GraphRenderer
+    dendrogram : bokeh.models.GraphRenderer
         Renderer returned by `bdendro.dendrogram_renderer` function.
-    labels : list[str] or None, optional
+    labels : Sequence[str] or None, optional
         Labels of leaves. If ``None``, indices of leaves are used.
     vertical : bool, optional
         If ``True``, the height direction of a dendrogram is the y direction.
         If ``False``, it is the x direction.
     """
-    n_nodes = len(dendrogram.layout_provider.graph_layout)
+    n_nodes = len(cast("StaticLayoutProvider", dendrogram.layout_provider).graph_layout)
     n_leaves = (n_nodes + 1) // 2
 
     if labels is None:
         labels = [str(leaf) for leaf in range(n_leaves)]
 
+    node_xs: tuple[float, ...]
+    node_ys: tuple[float, ...]
+    leaf_xs: tuple[float, ...]
+    leaf_ys: tuple[float, ...]
     if n_leaves:
-        node_coords = [dendrogram.layout_provider.graph_layout[node]
+        node_coords = [cast("StaticLayoutProvider", dendrogram.layout_provider).graph_layout[node]
                        for node in range(n_nodes)]
-        node_xs, node_ys = zip(*node_coords)
-        leaf_xs, leaf_ys = zip(*node_coords[:n_leaves])
+        node_xs, node_ys = zip(*node_coords, strict=True)
+        leaf_xs, leaf_ys = zip(*node_coords[:n_leaves], strict=True)
     else:
-        node_xs, node_ys = [], []
-        leaf_xs, leaf_ys = [], [], []
+        node_xs, node_ys = (), ()
+        leaf_xs, leaf_ys = (), ()
 
     if vertical:
         node_hs = node_ys
@@ -43,9 +62,10 @@ def set_axes(figure, dendrogram, labels=None, vertical=True):
 
     baxis_ticker = bokeh.models.FixedTicker(ticks=leaf_bs)
 
-    ticks = [str(b) if not float(b).is_integer() else str(int(b))
-             for b in leaf_bs]
-    label_mapping = {tick: labels[leaf] for leaf, tick in enumerate(ticks)}
+    label_mapping: dict[float | str, str | BaseText] = {
+        tick: labels[leaf]
+        for leaf, tick in enumerate(leaf_bs)
+    }
 
     if 2 <= n_leaves:
         min_b = min(leaf_bs)

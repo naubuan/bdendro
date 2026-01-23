@@ -1,10 +1,10 @@
-div.gallery {
+figure.gallery {
     display: inline-block !important;
     float: none !important;
     vertical-align: top;
 }
 
-div.gallery img {
+figure.gallery img {
     width: 12em;
     height: 12em;
     object-fit: contain;
@@ -12,7 +12,7 @@ div.gallery img {
     border-width: 0.2em;
 }
 
-div.gallery p.caption {
+figure.gallery figcaption {
     width: 12em;
     text-align: center;
     padding: 0;
