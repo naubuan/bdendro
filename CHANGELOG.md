@@ -1,6 +1,13 @@
 Change log
 ==========
 
+[1.1.1][] (2026-2-13)
+---------------------
+
+### Security
+
+* Updated Pillow to 12.1.1.
+
 [1.1.0][] (2026-1-23)
 ---------------------
 
@@ -21,5 +28,6 @@ Change log
 * Package.
 * Documentation.
 
+[1.1.1]: https://github.com/naubuan/bdendro/releases/tag/v1.1.1
 [1.1.0]: https://github.com/naubuan/bdendro/releases/tag/v1.1.0
 [1.0.0]: https://github.com/naubuan/bdendro/releases/tag/v1.0.0
