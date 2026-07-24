@@ -76,10 +76,10 @@ def set_axes(
     else:
         start = -0.5
         end = 0.5
-    b_range = bokeh.models.Range1d(start, end)
+    b_range = bokeh.models.Range1d(start=start, end=end)
 
     end = 1.1 * max(node_hs) if 2 <= n_leaves else 1.
-    h_range = bokeh.models.Range1d(0., end)
+    h_range = bokeh.models.Range1d(start=0., end=end)
 
     if vertical:
         figure.xaxis.ticker = baxis_ticker
