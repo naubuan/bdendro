@@ -54,7 +54,7 @@ def subtree_cmap(
     if skip_single:
         factors = factors[1 < nums]
     factors = factors[factors != ""]
-    factors = sorted(factors, key=lambda item: int(item))
+    factors = sorted(factors, key=int)
 
     palette = list(itertools.islice(itertools.cycle(palette), len(factors)))
 

@@ -84,8 +84,8 @@ def generate_image(path: Path, script: Path) -> None:
     with script.open(mode="r") as f:
         lines = f.readlines()
     lines[-1:] = [
-        "import chromedriver_binary\n",
-        f"bokeh.io.export_png(figure, filename='{path}')\n",
+        "import selenium.webdriver\n",
+        f"bokeh.io.export_png(figure, filename='{path}', webdriver=selenium.webdriver.Chrome())\n",
     ]
 
     exec("".join(lines))  # noqa: S102

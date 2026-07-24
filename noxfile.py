@@ -59,7 +59,7 @@ def cleandoc(session: Session) -> None:
     doc_root = pathlib.Path("docs_src")
 
     for path in (doc_root/"api").glob("*.rst"):
-        if path.name in {"bdendro.rst"}:
+        if path.name == "bdendro.rst":
             continue
         if path.is_file():
             session.log(f"remove file '{path}'")
