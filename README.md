@@ -6,10 +6,10 @@ Bokeh helpers for visualizing a dendrogram.
 Requirements
 ------------
 
-* [Python](https://www.python.org/) >= 3.6
-* [Bokeh](https://bokeh.org/) >= 1.1.0
-* [NumPy](https://numpy.org/) >= 1.10.1
-* [SciPy](https://scipy.org/scipylib/) >= 1.0.0
+* [Python](https://www.python.org/) >= 3.11
+* [Bokeh](https://bokeh.org/) >= 3.1.0
+* [NumPy](https://numpy.org/) >= 2.2.2
+* [SciPy](https://scipy.org/) >= 1.15.2
 
 Installation
 ------------
