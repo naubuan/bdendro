@@ -1,6 +1,17 @@
 Change log
 ==========
 
+[1.2.0][] (2026-10-24)
+----------
+
+### Removed
+
+* Support for Python 3.10.
+
+### Security
+
+* Updated transitive dependencies in the uv.lock file.
+
 [1.1.2][] (2026-7-24)
 ---------------------
 
@@ -35,6 +46,7 @@ Change log
 * Package.
 * Documentation.
 
+[1.2.0]: https://github.com/naubuan/bdendro/releases/tag/v1.2.0
 [1.1.2]: https://github.com/naubuan/bdendro/releases/tag/v1.1.2
 [1.1.1]: https://github.com/naubuan/bdendro/releases/tag/v1.1.1
 [1.1.0]: https://github.com/naubuan/bdendro/releases/tag/v1.1.0
